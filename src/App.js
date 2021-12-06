@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import './App.css';
-import "./InfoBox.css"
 import { Card, CardContent, FormControl, MenuItem, Select } from '@mui/material';
 import InfoBox from './InfoBox';
 import LineGraph from './LineGraph';
@@ -23,7 +22,7 @@ const App = () => {
   useEffect(() => {
     fetch('https://disease.sh/v3/covid-19/all')
     .then((response) => response.json())
-    .then(data => {
+    .then((data) => {
       setCountryInfo(data)
     })
   }, [])
@@ -60,8 +59,10 @@ const App = () => {
     .then((data) => {
       setCountry(countryCode)
       setCountryInfo(data)
-      setMapCenter([data.countryInfo.lat, data.countryInfo.long])
-      setMapZoom(4)
+      countryCode === "worldwide"
+        ? setMapCenter([34.80746, -40.4796])
+        : setMapCenter([data.countryInfo.lat, data.countryInfo.long])
+      countryCode === "worldwide" ? setMapZoom(3) : setMapZoom(4)
     })
   }
 
@@ -81,7 +82,8 @@ const App = () => {
         </div>
         
         <div className="app__stats">
-          <InfoBox title='Coronavirus Cases' cases={prettyPrintStat(countryInfo.todayCases)} total={numeral(countryInfo.cases).format("0.0a")} onClick={(e) => setCasesType("cases")} isRed active={casesType === "cases"}/>
+          <InfoBox 
+          title='Coronavirus Cases' cases={prettyPrintStat(countryInfo.todayCases)} total={numeral(countryInfo.cases).format("0.0a")} onClick={(e) => setCasesType("cases")} isRed active={casesType === "cases"}/>
           <InfoBox title='Recovered' cases={prettyPrintStat(countryInfo.todayRecovered)} total={numeral(countryInfo.recovered).format("0.0a")} onClick={(e) => setCasesType("recovered")} active={casesType === "recovered"} />
           <InfoBox title='Deaths' cases={prettyPrintStat(countryInfo.todayDeaths)} total={numeral(countryInfo.deaths).format("0.0a")} onClick={(e) => setCasesType("deaths")} isRed active={casesType === "deaths"} />
         </div>
