@@ -10,7 +10,10 @@
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
     "chart.js": "^3.6.0",
+    "chartjs-adapter-luxon": "^1.1.0",
+    "chartjs-adapter-moment": "^1.0.0",
     "leaflet": "^1.7.1",
+    "moment": "^2.29.1",
     "numeral": "^2.0.6",
     "react": "^17.0.2",
     "react-chartjs-2": "^4.0.0",
@@ -32,15 +35,15 @@
     ]
   },
   "browserslist": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ],
+    ">0.2%",
+    "not dead",
+    "not op_mini all"
+  ],
+  "development": [
+    "last 1 chrome version",
+    "last 1 firefox version",
+    "last 1 safari version"
+  ],
   "devDependencies": {
     "@types/leaflet": "^1.7.6"
   }

@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { Line } from 'react-chartjs-2';
 import numeral from 'numeral'
-import { Chart } from 'chart.js/auto';
+import { Chart } from 'chart.js/auto'; // new
+import 'chartjs-adapter-moment';
 
 export const options = {  
   responsive: true,
@@ -11,12 +12,7 @@ export const options = {
     },
     tooltip: {
       mode: "nearest",
-      intersect: false,
-      callbacks: {
-        label: function (data) {
-          return numeral(data.value).format("+0,0");
-        },
-      },
+      intersect: false
     },
   },
   elements: {
@@ -25,30 +21,26 @@ export const options = {
     },
   },
   maintainAspectRatio: false,  
-  // scales: {
-  //   xAxes: [
-  //     {
-  //       type: "time",
-  //       time: {
-  //         format: "MM/DD/YY",
-  //         tooltipFormat: "DD T",
-  //       },
-  //     },
-  //   ],
-  //   yAxes: [
-  //     {
-  //       gridLines: {
-  //         display: false,
-  //       },
-  //       ticks: {
-  //         // Include a dollar sign in the ticks
-  //         callback: function (value, index, values) {
-  //           return numeral(value).format("0a");
-  //         },
-  //       },
-  //     },
-  //   ],
-  // },
+  scales: {
+    x: {
+      type: "time",
+      time: {
+        unit: "day",
+        tooltipFormat: "ll",
+      },
+    },
+    y: {
+      grid: {
+        display: false,
+      },
+      ticks: {
+        // Include a dollar sign in the ticks
+        callback: function (value, index, values) {
+          return numeral(value).format("0a");
+        },
+      },
+    },
+  },
 };
 
 const buildChartData = (data, casesType) => {
@@ -87,14 +79,15 @@ const LineGraph = ({ casesType }) => {
 
   return (
     <div className='linegraph'>
-      <Line 
+      <Line className='app__graph'
         data={{
           datasets: [
             {
-              label: 'Stats',
+              label: 'Covid 19 Stats',
               backgroundColor: 'rgba(204, 16, 32, 0.55)',
               borderColor: '#CC1034',
               data: data,
+              tension: 0.1,
               fill: true
             },
           ],

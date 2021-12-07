@@ -34,12 +34,10 @@ body {
 }
 
 .app__right {
+  display: flex;
+  flex-direction: column;
   border-radius: 20px;
   flex: 1;
-}
-
-.app__right > div:nth-child(1) {
-  padding: .5rem;
 }
 
 .app__left {
@@ -63,8 +61,39 @@ body {
   margin-top: 1rem;
 }
 
+.app__right .MuiCardContent-root {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.app__graph {
+  flex-grow: 1;
+}
+
+.app__graphTitle {
+  margin-top: 10px;
+}
+
 @media (max-width: 990px) {
   .app {
     flex-direction: column;
   }
+
+  .app__stats {
+    flex-direction: column;
+  }
+
+  .app__left {
+    padding-right: 0px !important;
+  }
+
+  .infoBox:not(:last-child) {
+    margin-right: 0px !important;
+  }
+
+  .infoBox {
+    margin-bottom: 10px;
+  }
+
 }
